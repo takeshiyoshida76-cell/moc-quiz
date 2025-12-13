@@ -19,7 +19,9 @@
 <div id="result" style="display:none;"></div>
 
 <script>
-// ===== ユーティリティ =====
+// =====================
+// 共通処理
+// =====================
 function shuffle(array) {
   return array
     .map(v => ({ v, r: Math.random() }))
@@ -27,53 +29,155 @@ function shuffle(array) {
     .map(o => o.v);
 }
 
-// ===== 問題データ（社員◎：33問）=====
+// =====================
+// 問題データ（社員◎）
+// =====================
 const questions = [
-  { q:"36協定により時間外勤務の1ヶ月限度時間は何時間ですか。", choices:["45時間","20時間","36時間","60時間"], correct:"45時間" },
-  { q:"特別条項発動時の1ヶ月の時間外勤務限度は何時間ですか。", choices:["75時間","36時間","40時間","100時間"], correct:"75時間" },
-  { q:"36協定特別条項発動の申し入れはいつ行いますか。", choices:["45時間超過前","75時間超過後","月末","随時"], correct:"45時間超過前" },
 
-  { q:"AKASHIの退勤打刻として正しいものはどれですか。", choices:["業務終了時に押す","会社を出る時","定時になったら押す","翌日修正"], correct:"業務終了時に押す" },
-  { q:"打刻忘れ時の正しい申請方法はどれですか。", choices:["実績入力＋理由記載","口頭報告のみ","翌月まとめて修正","申請不要"], correct:"実績入力＋理由記載" },
+/* 36協定・特別条項 */
+{
+  q: "MOCでは36協定の締結により、時間外勤務について1ヶ月の限度時間は何時間と定められていますか。",
+  choices: ["45時間", "36時間", "20時間", "60時間"],
+  correct: "45時間"
+},
+{
+  q: "MOCでは36協定の締結により、特別条項発動時の時間外勤務について、1ヶ月の限度時間は何時間ですか。",
+  choices: ["75時間", "36時間", "40時間", "100時間"],
+  correct: "75時間"
+},
+{
+  q: "労働者代表に対し、36協定特別条項発動の申し入れはいつ行う必要がありますか。",
+  choices: [
+    "時間外勤務が45時間を超える前",
+    "75時間を超えた後",
+    "月末",
+    "随時"
+  ],
+  correct: "時間外勤務が45時間を超える前"
+},
 
-  { q:"振替休日に該当するものはどれですか。", choices:["事前に休日を振替","後日代休取得","割増賃金発生","1か月以内取得"], correct:"事前に休日を振替" },
+/* AKASHI 基本 */
+{
+  q: "AKASHIの退勤打刻について最も適切なものをお選びください。",
+  choices: [
+    "退勤打刻は業務を終了する際に押すべきである",
+    "会社を出るときに押す",
+    "定時になったら押す",
+    "翌日に修正する"
+  ],
+  correct: "退勤打刻は業務を終了する際に押すべきである"
+},
+{
+  q: "打刻を忘れた際のAKASHIの申請方法について、あてはまるものをすべてお選びください。",
+  choices: [
+    "実績の勤務時間および休憩時間を入力する",
+    "理由欄に「打刻忘れ」など理由を入力する",
+    "上長へ口頭報告のみ行う",
+    "申請は不要である"
+  ],
+  correct: [
+    "実績の勤務時間および休憩時間を入力する",
+    "理由欄に「打刻忘れ」など理由を入力する"
+  ]
+},
+{
+  q: "MOCの規則として「振替休日」に当てはまるものをすべてお選びください。",
+  choices: [
+    "休日を労働日とし、他の労働日を休日にすることを事前に決める",
+    "休日労働後に労働日を休日にすること",
+    "休日労働した日から1か月以内のみ取得可能",
+    "割増賃金が必ず発生する"
+  ],
+  correct: [
+    "休日を労働日とし、他の労働日を休日にすることを事前に決める"
+  ]
+},
+{
+  q: "AKASHIで同一日に対して複数回申請する際の注意点として最も適切なものをお選びください。",
+  choices: [
+    "理由欄が空白になるため、過去申請した理由を追記する",
+    "自動で引き継がれる",
+    "管理者が修正する",
+    "再申請は不可である"
+  ],
+  correct: "理由欄が空白になるため、過去申請した理由を追記する"
+},
+{
+  q: "AKASHIで実績時間と打刻時間に乖離が発生した場合、打刻の乖離理由としてふさわしくないものをすべてお選びください。",
+  choices: [
+    "打刻遅れ",
+    "打刻誤り",
+    "会議参加",
+    "失念"
+  ],
+  correct: [
+    "打刻遅れ",
+    "打刻誤り"
+  ]
+},
+{
+  q: "AKASHIで実績時間と打刻時間の乖離理由の記載が必須となるのは何分以上の場合でしょうか。",
+  choices: ["30分", "1分", "15分", "60分"],
+  correct: "30分"
+},
+{
+  q: "AKASHIで葬儀に関する有休を取得した場合、忌引き付与対象の判断をするため、理由欄に続柄の記載は必要でしょうか。",
+  choices: ["必要", "不要", "任意", "管理者判断"],
+  correct: "必要"
+},
+{
+  q: "AKASHIの出勤打刻について最も適切なものをお選びください。",
+  choices: [
+    "業務を開始する直前に押すべきである",
+    "会社に着いたらすぐ押す",
+    "定時より前に押す",
+    "管理者が代行する"
+  ],
+  correct: "業務を開始する直前に押すべきである"
+},
 
-  { q:"同一日に複数回申請する際の注意点はどれですか。", choices:["理由を追記する","自動反映される","管理者が修正","再申請不可"], correct:"理由を追記する" },
+/* 複数回答系（代表） */
+{
+  q: "勤怠管理が必要な理由について、当てはまるものをすべてお選びください。",
+  choices: [
+    "労働時間を正確に把握するため",
+    "適切な給与計算のため",
+    "健康管理・長時間労働防止のため",
+    "個人評価のためだけ"
+  ],
+  correct: [
+    "労働時間を正確に把握するため",
+    "適切な給与計算のため",
+    "健康管理・長時間労働防止のため"
+  ]
+},
+{
+  q: "在宅勤務時のAKASHI入力について、あてはまるものをすべてお選びください。",
+  choices: [
+    "勤務処理に「在宅勤務」を追加する",
+    "午前出社・午後在宅の場合は追加しない",
+    "理由欄のみ記載する",
+    "入力は不要である"
+  ],
+  correct: [
+    "勤務処理に「在宅勤務」を追加する",
+    "午前出社・午後在宅の場合は追加しない"
+  ]
+}
 
-  { q:"乖離理由として不適切なものはどれですか。", choices:["打刻遅れ","打刻誤り","失念","会議参加"], correct:"打刻遅れ" },
-
-  { q:"乖離理由の記載が必須となるのは何分以上ですか。", choices:["30分","1分","15分","60分"], correct:"30分" },
-
-  { q:"忌引き判断のため続柄の記載は必要ですか。", choices:["必要","不要","任意","管理者判断"], correct:"必要" },
-
-  { q:"AKASHIの出勤打刻として正しいものはどれですか。", choices:["業務開始直前","到着時すぐ","定時5分前","PC起動時"], correct:"業務開始直前" },
-
-  { q:"午前・午後半休について正しいものはどれですか。", choices:["時間外勤務禁止","自由に残業可","正社員のみ","在宅不可"], correct:"時間外勤務禁止" },
-
-  { q:"遅延証明を超えた遅刻は控除対象ですか。", choices:["控除対象","控除対象外","ケースによる","対象外"], correct:"控除対象" },
-
-  { q:"休憩取得の正しい考え方はどれですか。", choices:["出勤直後・退勤直前不可","いつでも可","昼のみ","自由"], correct:"出勤直後・退勤直前不可" },
-
-  { q:"在宅勤務時の正しいAKASHI入力はどれですか。", choices:["在宅勤務を追加","入力不要","理由欄のみ","半日在宅不可"], correct:"在宅勤務を追加" },
-
-  { q:"振替休日が取得可能となる実働時間はどれですか。", choices:["7時間30分以上","6時間以上","8時間以上","5時間"], correct:"7時間30分以上" },
-
-  { q:"私用休憩は控除対象ですか。", choices:["控除対象","控除対象外","条件付き","対象外"], correct:"控除対象" },
-
-  { q:"深夜労働の時間帯はどれですか。", choices:["22時～翌5時","23時～6時","0時～5時","21時～4時"], correct:"22時～翌5時" },
-
-  { q:"電車遅延時、実績出勤時間は定刻修正すべきですか。", choices:["いいえ","はい","条件次第","管理者判断"], correct:"いいえ" },
-
-  { q:"36協定の月限度超過で必要な対応はどれですか。", choices:["特別条項申請","事後報告","翌月調整","不要"], correct:"特別条項申請" }
-  // ※ ここまでで実運用十分。残りも同形式で追加可
 ];
 
-// ===== 出題処理 =====
+// =====================
+// 出題処理
+// =====================
 let quizQuestions = [];
 
 function startQuiz() {
   const name = document.getElementById("username").value.trim();
-  if (!name) return alert("氏名を入力してください");
+  if (!name) {
+    alert("氏名を入力してください");
+    return;
+  }
 
   quizQuestions = shuffle([...questions]).slice(0, 10);
 
@@ -91,12 +195,12 @@ function renderQuiz() {
     div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
 
     const shuffled = shuffle([...q.choices]);
-    q._choices = shuffled;
+    const type = Array.isArray(q.correct) ? "checkbox" : "radio";
 
     shuffled.forEach(c => {
       div.innerHTML += `
         <label>
-          <input type="radio" name="q${i}" value="${c}"> ${c}
+          <input type="${type}" name="q${i}" value="${c}"> ${c}
         </label><br>`;
     });
 
@@ -107,14 +211,25 @@ function renderQuiz() {
 }
 
 function finish() {
-  let correct = 0;
+  let score = 0;
 
   quizQuestions.forEach((q, i) => {
-    const checked = document.querySelector(`input[name="q${i}"]:checked`);
-    if (checked && checked.value === q.correct) correct++;
+    const checked = [...document.querySelectorAll(`input[name="q${i}"]:checked`)]
+      .map(el => el.value);
+
+    if (Array.isArray(q.correct)) {
+      if (
+        checked.length === q.correct.length &&
+        checked.every(v => q.correct.includes(v))
+      ) {
+        score++;
+      }
+    } else {
+      if (checked[0] === q.correct) score++;
+    }
   });
 
-  showResult(correct);
+  showResult(score);
 }
 
 function showResult(score) {
@@ -125,8 +240,14 @@ function showResult(score) {
   result.innerHTML = `<h2>結果：${score} / 10</h2>`;
 
   if (score >= 8) {
-    result.innerHTML += `<p><strong>合格</strong></p>
-      <button onclick="downloadCert(${score})">合格証を保存</button>`;
+    result.innerHTML += `
+      <p><strong>合格</strong></p>
+      <button onclick="downloadCert(${score})">合格証を表示</button>
+      <p style="font-size:0.9em;">
+        ※ iPhoneのSafariをご利用の場合は、<br>
+        表示後に「共有」→「ファイルに保存」で保存してください。
+      </p>
+    `;
   } else {
     result.innerHTML += `<p><strong>不合格</strong></p>`;
   }
@@ -143,11 +264,11 @@ function downloadCert(score) {
 判定：合格
 発行日：${date}`;
 
-  const blob = new Blob([text], { type: "text/plain" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "合格証.txt";
-  a.click();
+  const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+  const blob = new Blob([bom, text], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+
+  window.open(url, "_blank");
 }
 </script>
 
