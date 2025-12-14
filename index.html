@@ -30,141 +30,26 @@ function shuffle(array) {
 }
 
 // =====================
-// 問題データ（社員◎）
+// 問題データ（省略せずそのまま使用）
 // =====================
 const questions = [
-
-/* 36協定・特別条項 */
-{
-  q: "MOCでは36協定の締結により、時間外勤務について1ヶ月の限度時間は何時間と定められていますか。",
-  choices: ["45時間", "36時間", "20時間", "60時間"],
-  correct: "45時間"
-},
-{
-  q: "MOCでは36協定の締結により、特別条項発動時の時間外勤務について、1ヶ月の限度時間は何時間ですか。",
-  choices: ["75時間", "36時間", "40時間", "100時間"],
-  correct: "75時間"
-},
-{
-  q: "労働者代表に対し、36協定特別条項発動の申し入れはいつ行う必要がありますか。",
-  choices: [
-    "時間外勤務が45時間を超える前",
-    "75時間を超えた後",
-    "月末",
-    "随時"
-  ],
-  correct: "時間外勤務が45時間を超える前"
-},
-
-/* AKASHI 基本 */
-{
-  q: "AKASHIの退勤打刻について最も適切なものをお選びください。",
-  choices: [
-    "退勤打刻は業務を終了する際に押すべきである",
-    "会社を出るときに押す",
-    "定時になったら押す",
-    "翌日に修正する"
-  ],
-  correct: "退勤打刻は業務を終了する際に押すべきである"
-},
-{
-  q: "打刻を忘れた際のAKASHIの申請方法について、あてはまるものをすべてお選びください。",
-  choices: [
-    "実績の勤務時間および休憩時間を入力する",
-    "理由欄に「打刻忘れ」など理由を入力する",
-    "上長へ口頭報告のみ行う",
-    "申請は不要である"
-  ],
-  correct: [
-    "実績の勤務時間および休憩時間を入力する",
-    "理由欄に「打刻忘れ」など理由を入力する"
-  ]
-},
-{
-  q: "MOCの規則として「振替休日」に当てはまるものをすべてお選びください。",
-  choices: [
-    "休日を労働日とし、他の労働日を休日にすることを事前に決める",
-    "休日労働後に労働日を休日にすること",
-    "休日労働した日から1か月以内のみ取得可能",
-    "割増賃金が必ず発生する"
-  ],
-  correct: [
-    "休日を労働日とし、他の労働日を休日にすることを事前に決める"
-  ]
-},
-{
-  q: "AKASHIで同一日に対して複数回申請する際の注意点として最も適切なものをお選びください。",
-  choices: [
-    "理由欄が空白になるため、過去申請した理由を追記する",
-    "自動で引き継がれる",
-    "管理者が修正する",
-    "再申請は不可である"
-  ],
-  correct: "理由欄が空白になるため、過去申請した理由を追記する"
-},
-{
-  q: "AKASHIで実績時間と打刻時間に乖離が発生した場合、打刻の乖離理由としてふさわしくないものをすべてお選びください。",
-  choices: [
-    "打刻遅れ",
-    "打刻誤り",
-    "会議参加",
-    "失念"
-  ],
-  correct: [
-    "打刻遅れ",
-    "打刻誤り"
-  ]
-},
-{
-  q: "AKASHIで実績時間と打刻時間の乖離理由の記載が必須となるのは何分以上の場合でしょうか。",
-  choices: ["30分", "1分", "15分", "60分"],
-  correct: "30分"
-},
-{
-  q: "AKASHIで葬儀に関する有休を取得した場合、忌引き付与対象の判断をするため、理由欄に続柄の記載は必要でしょうか。",
-  choices: ["必要", "不要", "任意", "管理者判断"],
-  correct: "必要"
-},
-{
-  q: "AKASHIの出勤打刻について最も適切なものをお選びください。",
-  choices: [
-    "業務を開始する直前に押すべきである",
-    "会社に着いたらすぐ押す",
-    "定時より前に押す",
-    "管理者が代行する"
-  ],
-  correct: "業務を開始する直前に押すべきである"
-},
-
-/* 複数回答系（代表） */
-{
-  q: "勤怠管理が必要な理由について、当てはまるものをすべてお選びください。",
-  choices: [
-    "労働時間を正確に把握するため",
-    "適切な給与計算のため",
-    "健康管理・長時間労働防止のため",
-    "個人評価のためだけ"
-  ],
-  correct: [
-    "労働時間を正確に把握するため",
-    "適切な給与計算のため",
-    "健康管理・長時間労働防止のため"
-  ]
-},
-{
-  q: "在宅勤務時のAKASHI入力について、あてはまるものをすべてお選びください。",
-  choices: [
-    "勤務処理に「在宅勤務」を追加する",
-    "午前出社・午後在宅の場合は追加しない",
-    "理由欄のみ記載する",
-    "入力は不要である"
-  ],
-  correct: [
-    "勤務処理に「在宅勤務」を追加する",
-    "午前出社・午後在宅の場合は追加しない"
-  ]
-}
-
+  // （前のコードと同じ問題データをここにすべて貼り付けています。省略せずそのまま使ってください）
+  /* 36協定・特別条項 */
+  { q: "MOCでは36協定の締結により、時間外勤務について1ヶ月の限度時間は何時間と定められていますか。", choices: ["45時間", "36時間", "20時間", "60時間"], correct: "45時間" },
+  { q: "MOCでは36協定の締結により、特別条項発動時の時間外勤務について、1ヶ月の限度時間は何時間ですか。", choices: ["75時間", "36時間", "40時間", "100時間"], correct: "75時間" },
+  { q: "労働者代表に対し、36協定特別条項発動の申し入れはいつ行う必要がありますか。", choices: ["時間外勤務が45時間を超える前", "75時間を超えた後", "月末", "随時"], correct: "時間外勤務が45時間を超える前" },
+  /* AKASHI 基本 */
+  { q: "AKASHIの退勤打刻について最も適切なものをお選びください。", choices: ["退勤打刻は業務を終了する際に押すべきである", "会社を出るときに押す", "定時になったら押す", "翌日に修正する"], correct: "退勤打刻は業務を終了する際に押すべきである" },
+  { q: "打刻を忘れた際のAKASHIの申請方法について、あてはまるものをすべてお選びください。", choices: ["実績の勤務時間および休憩時間を入力する", "理由欄に「打刻忘れ」など理由を入力する", "上長へ口頭報告のみ行う", "申請は不要である"], correct: ["実績の勤務時間および休憩時間を入力する", "理由欄に「打刻忘れ」など理由を入力する"] },
+  { q: "MOCの規則として「振替休日」に当てはまるものをすべてお選びください。", choices: ["休日を労働日とし、他の労働日を休日にすることを事前に決める", "休日労働後に労働日を休日にすること", "休日労働した日から1か月以内のみ取得可能", "割増賃金が必ず発生する"], correct: ["休日を労働日とし、他の労働日を休日にすることを事前に決める"] },
+  { q: "AKASHIで同一日に対して複数回申請する際の注意点として最も適切なものをお選びください。", choices: ["理由欄が空白になるため、過去申請した理由を追記する", "自動で引き継がれる", "管理者が修正する", "再申請は不可である"], correct: "理由欄が空白になるため、過去申請した理由を追記する" },
+  { q: "AKASHIで実績時間と打刻時間に乖離が発生した場合、打刻の乖離理由としてふさわしくないものをすべてお選びください。", choices: ["打刻遅れ", "打刻誤り", "会議参加", "失念"], correct: ["打刻遅れ", "打刻誤り"] },
+  { q: "AKASHIで実績時間と打刻時間の乖離理由の記載が必須となるのは何分以上の場合でしょうか。", choices: ["30分", "1分", "15分", "60分"], correct: "30分" },
+  { q: "AKASHIで葬儀に関する有休を取得した場合、忌引き付与対象の判断をするため、理由欄に続柄の記載は必要でしょうか。", choices: ["必要", "不要", "任意", "管理者判断"], correct: "必要" },
+  { q: "AKASHIの出勤打刻について最も適切なものをお選びください。", choices: ["業務を開始する直前に押すべきである", "会社に着いたらすぐ押す", "定時より前に押す", "管理者が代行する"], correct: "業務を開始する直前に押すべきである" },
+  /* 複数回答系 */
+  { q: "勤怠管理が必要な理由について、当てはまるものをすべてお選びください。", choices: ["労働時間を正確に把握するため", "適切な給与計算のため", "健康管理・長時間労働防止のため", "個人評価のためだけ"], correct: ["労働時間を正確に把握するため", "適切な給与計算のため", "健康管理・長時間労働防止のため"] },
+  { q: "在宅勤務時のAKASHI入力について、あてはまるものをすべてお選びください。", choices: ["勤務処理に「在宅勤務」を追加する", "午前出社・午後在宅の場合は追加しない", "理由欄のみ記載する", "入力は不要である"], correct: ["勤務処理に「在宅勤務」を追加する", "午前出社・午後在宅の場合は追加しない"] }
 ];
 
 // =====================
@@ -193,7 +78,7 @@ function renderQuiz() {
 
   quizQuestions.forEach((q, i) => {
     const div = document.createElement("div");
-    div.innerHTML = `<p>${i + 1}. ${q.q}</p>`;
+    div.innerHTML = `<p><strong>${i + 1}. ${q.q}</strong></p>`;
 
     const shuffled = shuffle([...q.choices]);
     const type = Array.isArray(q.correct) ? "checkbox" : "radio";
@@ -204,11 +89,11 @@ function renderQuiz() {
           <input type="${type}" name="q${i}" value="${c}"> ${c}
         </label><br>`;
     });
-
+    div.innerHTML += "<br>";
     quiz.appendChild(div);
   });
 
-  quiz.innerHTML += `<br><button onclick="finish()">回答終了</button>`;
+  quiz.innerHTML += `<button onclick="finish()">回答終了</button>`;
 }
 
 function finish() {
@@ -222,14 +107,11 @@ function finish() {
     userAnswers.push(checked);
 
     if (Array.isArray(q.correct)) {
-      if (
-        checked.length === q.correct.length &&
-        checked.every(v => q.correct.includes(v))
-      ) {
+      if (checked.length === q.correct.length && checked.every(v => q.correct.includes(v))) {
         score++;
       }
     } else {
-      if (checked[0] === q.correct) score++;
+      if (checked.length === 1 && checked[0] === q.correct) score++;
     }
   });
 
@@ -237,69 +119,62 @@ function finish() {
 }
 
 function showResult(score) {
-  const result = document.getElementById("result");
   document.getElementById("quiz").style.display = "none";
+  const result = document.getElementById("result");
   result.style.display = "block";
 
-  result.innerHTML = `<h2>結果：${score} / 10</h2>`;
+  let html = `<h2>結果：${score} / 10</h2>`;
 
-if (score >= 8) {
-  result.innerHTML += `
-    <p><strong>合格</strong></p>
-    <button onclick="downloadCert(${score})">合格証を表示</button>
-    <p style="font-size:0.9em;">
-      ※ iPhoneをご利用の場合は、<br>
-      合格証の内容を長押ししてコピーし、<br>
-      メモアプリ等に貼り付けて保存してください。
-    </p>
-  `;
+  if (score >= 8) {
+    html += `<p><strong style="color:blue;font-size:1.5em;">合格おめでとうございます！</strong></p>`;
+    html += `<button onclick="downloadCert(${score})">合格証を表示・ダウンロード</button>`;
+    html += `<p style="font-size:0.9em;">
+      ※ iPhoneをご利用の場合は、表示された合格証の内容を長押ししてコピーし、メモアプリ等に貼り付けて保存してください。
+    </p>`;
   } else {
-    result.innerHTML += `<p><strong>不合格</strong></p>`;
+    html += `<p><strong style="color:red;font-size:1.5em;">不合格</strong>（8点以上で合格です）</p>`;
   }
 
-  result.innerHTML += `
-  <button onclick="showReview()">答え合わせを見る</button>
-`;
-}
-
-  function showReview() {
-  const result = document.getElementById("result");
-
-  let html = "<h2>答え合わせ</h2>";
+  // 答え合わせをそのまま表示
+  html += `<h2 style="margin-top:40px;">答え合わせ</h2>`;
 
   quizQuestions.forEach((q, i) => {
     const user = userAnswers[i];
     const correct = Array.isArray(q.correct) ? q.correct : [q.correct];
 
-    const isCorrect =
-      user.length === correct.length &&
-      user.every(v => correct.includes(v));
+    const isCorrect = user.length === correct.length && && 
+                      user.every(v => correct.includes(v)) && 
+                      correct.every(v => user.includes(v));
+
+    const userText = user.length > 0 ? user.join("、") : "未回答";
+    const correctText = correct.join("、");
 
     html += `<hr>`;
     html += `<p><strong>Q${i + 1}. ${q.q}</strong></p>`;
-    html += `<p>あなたの回答： ${user.join("、") || "未回答"}</p>`;
-    html += `<p>正答： ${correct.join("、")}</p>`;
+    html += `<p>あなたの回答： ${userText}</p>`;
+    html += `<p>正答： <span style="color:green;font-weight:bold;">${correctText}</span></p>`;
     html += `<p>判定： ${isCorrect ? "✅ 正解" : "❌ 不正解"}</p>`;
   });
 
-  result.innerHTML += html;
+  result.innerHTML = html;
 }
 
 function downloadCert(score) {
-  const name = document.getElementById("username").value;
+  const name = document.getElementById("username").value.trim();
   const date = new Date().toLocaleDateString("ja-JP");
 
-  const text =
-`合格証
+  const text = `合格証
+
 氏名：${name}
 得点：${score} / 10
 判定：合格
-発行日：${date}`;
+発行日：${date}
+
+おめでとうございます！`;
 
   const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
   const blob = new Blob([bom, text], { type: "text/plain;charset=utf-8" });
   const url = URL.createObjectURL(blob);
-
   window.open(url, "_blank");
 }
 </script>
