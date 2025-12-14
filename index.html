@@ -239,15 +239,16 @@ function showResult(score) {
 
   result.innerHTML = `<h2>結果：${score} / 10</h2>`;
 
-  if (score >= 8) {
-    result.innerHTML += `
-      <p><strong>合格</strong></p>
-      <button onclick="downloadCert(${score})">合格証を表示</button>
-      <p style="font-size:0.9em;">
-        ※ iPhoneのSafariをご利用の場合は、<br>
-        表示後に「共有」→「ファイルに保存」で保存してください。
-      </p>
-    `;
+if (score >= 8) {
+  result.innerHTML += `
+    <p><strong>合格</strong></p>
+    <button onclick="downloadCert(${score})">合格証を表示</button>
+    <p style="font-size:0.9em;">
+      ※ iPhoneをご利用の場合は、<br>
+      合格証の内容を長押ししてコピーし、<br>
+      メモアプリ等に貼り付けて保存してください。
+    </p>
+  `;
   } else {
     result.innerHTML += `<p><strong>不合格</strong></p>`;
   }
