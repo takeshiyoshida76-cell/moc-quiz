@@ -212,10 +212,13 @@ function renderQuiz() {
 
 function finish() {
   let score = 0;
+  userAnswers = [];
 
   quizQuestions.forEach((q, i) => {
     const checked = [...document.querySelectorAll(`input[name="q${i}"]:checked`)]
       .map(el => el.value);
+
+    userAnswers.push(checked);
 
     if (Array.isArray(q.correct)) {
       if (
@@ -252,6 +255,33 @@ if (score >= 8) {
   } else {
     result.innerHTML += `<p><strong>不合格</strong></p>`;
   }
+
+  result.innerHTML += `
+  <button onclick="showReview()">答え合わせを見る</button>
+`;
+}
+
+  function showReview() {
+  const result = document.getElementById("result");
+
+  let html = "<h2>答え合わせ</h2>";
+
+  quizQuestions.forEach((q, i) => {
+    const user = userAnswers[i];
+    const correct = Array.isArray(q.correct) ? q.correct : [q.correct];
+
+    const isCorrect =
+      user.length === correct.length &&
+      user.every(v => correct.includes(v));
+
+    html += `<hr>`;
+    html += `<p><strong>Q${i + 1}. ${q.q}</strong></p>`;
+    html += `<p>あなたの回答： ${user.join("、") || "未回答"}</p>`;
+    html += `<p>正答： ${correct.join("、")}</p>`;
+    html += `<p>判定： ${isCorrect ? "✅ 正解" : "❌ 不正解"}</p>`;
+  });
+
+  result.innerHTML += html;
 }
 
 function downloadCert(score) {
