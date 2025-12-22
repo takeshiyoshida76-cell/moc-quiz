@@ -12,6 +12,10 @@
   氏名：
   <input type="text" id="username" placeholder="名前を入力">
   <br><br>
+  <div id="totalQuestions"></div> <!-- 全問題数表示 -->
+  <label for="numQuestions">何問出題しますか？（1〜全問数）</label>
+  <input type="number" id="numQuestions" min="1" placeholder="例: 10">
+  <br><br>
   <button onclick="startQuiz()">テスト開始</button>
 </div>
 
@@ -378,11 +382,18 @@ const questions = [
 ];
 
 // =====================
-// 出題処理
+// 開始画面の初期化
 // =====================
-let quizQuestions = [];
-let userAnswers = [];
+window.onload = function() {
+  const total = questions.length;
+  document.getElementById("totalQuestions").innerHTML = `全問題数: ${total}問`;
+  document.getElementById("numQuestions").max = total;
+  document.getElementById("numQuestions").value = Math.min(10, total); // デフォルト: 10問 or 全問
+};
 
+// =====================
+// 開始処理
+// =====================
 function startQuiz() {
   const name = document.getElementById("username").value.trim();
   if (!name) {
@@ -390,12 +401,27 @@ function startQuiz() {
     return;
   }
 
-  quizQuestions = shuffle([...questions]).slice(0, 10);
+  const totalQuestions = questions.length;
+  let numQuestions = parseInt(document.getElementById("numQuestions").value);
+
+  if (isNaN(numQuestions) || numQuestions < 1 || numQuestions > totalQuestions) {
+    alert(`1〜${totalQuestions}問の間で入力してください`);
+    return;
+  }
+
+  // 問題をランダム抽出（指定数）
+  quizQuestions = shuffle([...questions]).slice(0, numQuestions);
 
   document.getElementById("start").style.display = "none";
   document.getElementById("quiz").style.display = "block";
   renderQuiz();
 }
+
+// =====================
+// 出題処理
+// =====================
+let quizQuestions = [];
+let userAnswers = [];
 
 function renderQuiz() {
   const quiz = document.getElementById("quiz");
@@ -421,6 +447,9 @@ function renderQuiz() {
   quiz.innerHTML += `<button onclick="finish()">回答終了</button>`;
 }
 
+// =====================
+// 採点処理
+// =====================
 function finish() {
   let score = 0;
   userAnswers = [];
@@ -440,27 +469,31 @@ function finish() {
     }
   });
 
-  showResult(score);
+  const requiredScore = Math.ceil(quizQuestions.length * 0.8); // 80%切り上げ
+  showResult(score, requiredScore);
 }
 
-function showResult(score) {
+// =====================
+// 結果表示処理
+// =====================
+function showResult(score, requiredScore) {
   document.getElementById("quiz").style.display = "none";
   const result = document.getElementById("result");
   result.style.display = "block";
 
-  let html = `<h2>結果：${score} / 10</h2>`;
+  let html = `<h2>結果：${score} / ${quizQuestions.length}（合格ライン: ${requiredScore}点以上）</h2>`;
 
-  if (score >= 8) {
+  if (score >= requiredScore) {
     html += `<p><strong style="color:blue;font-size:1.5em;">合格おめでとうございます！</strong></p>`;
     html += `<button onclick="downloadCert(${score})">合格証を表示・ダウンロード</button>`;
     html += `<p style="font-size:0.9em;">
       ※ iPhoneをご利用の場合は、表示された合格証の内容を長押ししてコピーし、メモアプリ等に貼り付けて保存してください。
     </p>`;
   } else {
-    html += `<p><strong style="color:red;font-size:1.5em;">不合格</strong>（8点以上で合格です）</p>`;
+    html += `<p><strong style="color:red;font-size:1.5em;">不合格</strong>（${requiredScore}点以上で合格です）</p>`;
   }
 
-  // 答え合わせをそのまま表示
+  // 答え合わせ表示
   html += `<h2 style="margin-top:40px;">答え合わせ</h2>`;
 
   quizQuestions.forEach((q, i) => {
@@ -484,6 +517,9 @@ function showResult(score) {
   result.innerHTML = html;
 }
 
+// =====================
+// 合格証ダウンロード
+// =====================
 function downloadCert(score) {
   const name = document.getElementById("username").value.trim();
   const date = new Date().toLocaleDateString("ja-JP");
@@ -491,7 +527,7 @@ function downloadCert(score) {
   const text = `合格証
 
 氏名：${name}
-得点：${score} / 10
+得点：${score} / ${quizQuestions.length}
 判定：合格
 発行日：${date}
 
